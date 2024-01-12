@@ -9,8 +9,16 @@ jobs:
     steps:
       - name: Create repository
         uses: actions/checkout@v4
+        
       - name: Set Up Node.js
         uses: actions/setup-node@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.simone }}
+          password: ${{ secrets.simone }}
+          
       - name: Build and Test Docker image
         run: >-
           docker build -t dockerImage docker run -d --name dockerContainer
