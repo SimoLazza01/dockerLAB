@@ -29,7 +29,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta_pytorch.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           uses: actions/checkout@v2
       - name: Clean Image
