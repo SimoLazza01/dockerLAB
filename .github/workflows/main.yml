@@ -1,25 +1,19 @@
 name: Docker Test
-on: 
+'on':
   push:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Create repository
-      uses: actions/checkout@v4
-
-    - name: Set Up Node.js
-      uses: actions/setup-node@v3
-
-    - name: Build and Test Docker image
-      run:  docker build -t dockerImage
-            docker run -d --name dockerContainer dockerImage
-            docker exec -it dockerContainer sh 
-
-    - name: Clean Image
-      run:  docker stop dockerContainer
-            docker rm dockerContainer
+      - name: Create repository
+        uses: actions/checkout@v4
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+      - name: Build and Test Docker image
+        run: >-
+          docker build -t dockerImage docker run -d --name dockerContainer
+          dockerImage docker exec -it dockerContainer sh
+      - name: Clean Image
+        run: docker stop dockerContainer docker rm dockerContainer
