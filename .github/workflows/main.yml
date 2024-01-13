@@ -31,13 +31,16 @@ jobs:
               ghcr.io/${{ github.repository }}
           tags: latest
 
+      - name: Debug
+        run: echo "Tags:${{ steps.meta2.outputs.tags }}"
+
       - name: Build and push Docker images
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
-          tags: ${{ steps.meta_pytorch.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta2.outputs.tags }}
+          labels: ${{ steps.meta2.outputs.labels }}
 
       - name: Clean Image
         run: docker stop dockerContainer docker rm dockerContainer
